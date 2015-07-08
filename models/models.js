@@ -24,6 +24,7 @@ var sequelize = new Sequelize(DB_name, user, pwd,
     omitNull: true      // solo Postgres
   }
 );
+
 // var sequelize = new Sequelize(null, null, null, {dialect: "sqlite", storage: "quiz.sqlite"});
 // Importar definicion de la tabla Quiz
 var quiz_path = path.join(__dirname,'quiz');
