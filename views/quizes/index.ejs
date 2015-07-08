@@ -1,4 +1,4 @@
- <form name="search" method="get" action="/quizes">
+<form name="search" method="get" action="/quizes">
     <p>Buscador</p>
     <input type="text" name="search" value="" />
     <input type="submit" value="Enviar" />
@@ -10,17 +10,29 @@
         %>
         <tr>
             <td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %> - (<%= quizes[i].tema %>)</a></td>
-            <td><a href="/quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
-            <td>
-              <form method="post" action="/quizes/<%= quizes[i].id %>?_method=delete">
-                <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
-                  borrar
-                </button>
-              </form>
-            </td>
+            <%
+            if(session.user){
+                %>
+                <td><a href="/quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
+                <td>
+                    <form method="post" action="/quizes/<%= quizes[i].id %>?_method=delete">
+                        <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+                            borrar
+                        </button>
+                    </form>
+                </td>
+                <%
+            }
+            %>
         </tr>
         <%
     }
     %>
 </table>
-<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<%
+if(session.user){
+    %>
+    <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+    <%
+}
+%>
